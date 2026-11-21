@@ -1,0 +1,10 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Athletics Meet Manager</title><link rel="stylesheet" href="css/style.css"></head>
+<body><div class="top"><h1 id="mn">Athletics Meet Manager</h1></div>
+<div class="launch" id="L"></div>
+<script src="lib/qrcode.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script><script src="js/firebase-config.js"></script><script src="js/common.js"></script><script>
+connect(()=>{$('#mn').textContent=meetName()});
+{const base=location.origin+location.pathname.replace(/[^\/]*$/,'').replace(/\/$/,'');
+ const qr=u=>{const q=qrcode(0,'M');q.addData(u);q.make();return q.createSvgTag({cellSize:4,margin:2,scalable:true}).replace('<svg','<svg class="qr"')};
+ const c=(t,d,p,qrOn)=>`<div class="card"><h2>${t}</h2><p class="mu">${d}</p>${qrOn?qr(base+p):''}<p class="mu" style="word-break:break-all">${qrOn?base+p:''}</p><a class="b" href="${p.slice(1)}">Open</a></div>`;
+ $('#L').innerHTML=c('Control room','Registration, events, flags, reports (login required)','/admin.html',0)+c('Main scoreboard','Open full-screen on the projector / big display (public)','/board.html',1)+c('Mobile entry','Scan with phone - enter times from the track (login required)','/timing.html',1)}
+</script></body></html>
